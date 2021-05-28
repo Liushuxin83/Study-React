@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		class Person {
+			constructor(name, age) {
+				this.name = name
+				this.age = age
+			}
+			// 一搬方法   speak放在原型对象上供实例使用
+			// 通过person实例调用speak时，speak中的this就是person实例
+			speak() {
+				console.log(`我叫${this.name},我的年龄是${this.age}`);
+			}
+		}
+		// const p1 = new Person('刘舒新', 20);
+		// const p2 = new Person('lsx', 18);
+		// console.log(p1, p2);
+		// p1.speak();
+		// p2.speak();
+		class Student extends Person {
+			constructor(name, age, grade) {
+				// super帮你调用父类的构造器
+				super(name, age)
+				this.grade = grade
+			}
+			// 重写从父类继承过来的方法
+			speak() {
+				console.log(`我是${this.name},我的年龄是${this.age},我读${this.grade}年级`);
+			}
+		}
+		Student.study = {
+			study: 'stydy'
+		}
+		console.log(Student.study);
+		const s1 = new Student('小张', 100, '高一');
+		console.log(s1);
+		s1.speak();
+		class Car {
+			constructor(name, price) {
+				this.name = name
+				this.price = price
+			}
+			// 类中可以写赋值语句   会往Car实例上追加属性wheel为4
+			wheel = 4
+			// 给Car自身添加属性
+			static demo = 10000
+		}
+		const c1 = new Car('奥迪', 1999);
+		const c2 = new Car('奔驰', 2999)
+		console.log(c1, c2);
+
+
+
+
+		// 展开运算符
+		let person = { name: 'tom', age: 18 };
+		let student = { ...person };
+		person.name = 'lsx'
+		console.log(person);
+		console.log(student);
+
+
+		// 可以实现浅拷贝
+		let a = {
+			id: 1,
+			name: [{ id: 2 }]
+		};
+		let b = { ...a };
+		a.id = 100
+		a.name[0].id = 200
+		console.log(a);
+		console.log(b);
+	</script>
+</body>
+
+</html>
