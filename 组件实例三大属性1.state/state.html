@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div id="test"></div>
+	<script src="../旧版本/react.development.js"></script>
+	<script src="../旧版本/react-dom.development.js"></script>
+	<script src="../旧版本/babel.min.js"></script>
+	<script type="text/babel">
+		class Whether extends React.Component {
+			// constructor  只调用一次
+			constructor(props) {
+				super(props)
+				this.state = {
+					isHot: true
+				}
+				// 解决onChangeWhether中this指向问题
+				this.onChangeWhether = this.onChangeWhether.bind(this)
+			}
+			// render函数调用 1+n次   第一次初始化也会调用render函数
+			render() {
+				// console.log(this);
+				// 读取状态
+				const { isHot } = this.state
+				return <h1 onClick={this.onChangeWhether}>今天天气很{isHot ? '炎热' : '凉爽'}</h1>
+			}
+			// 自定义事件点几次调几次
+			// 定义事件   onChangeWhether放在了Whether的原型对象上 供实例使用
+			onChangeWhether() {
+				// 由于onChangeWhether是作为onClick的回调，所以不是通过实例调用的，是直接调用
+				// alert(111)
+				console.log(this);
+				const { isHot } = this.state
+				this.setState({ isHot: !isHot })
+			}
+		}
+		ReactDOM.render(<Whether />, document.querySelector('#test'));
+	</script>
+</body>
+
+</html>
