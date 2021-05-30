@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div id="test"></div>
+	<script src="../旧版本/react.development.js"></script>
+	<script src="../旧版本/react-dom.development.js"></script>
+	<script src="../旧版本/babel.min.js"></script>
+	<!-- 用于对标签属性进行限制 -->
+	<script src="../旧版本/prop-types.js"></script>
+	<script type="text/babel">
+    function Person(props){
+			console.log(props);
+			return (
+				<ul>
+					<li>姓名：{props.name}</li>
+					<li>姓别：{props.sex}</li>
+					<li>年龄：{props.age}</li>
+				</ul>
+			)
+		}
+		// 对标签属性进行类型 和 必要性限制
+			Person.propTypes = {
+				name: PropTypes.string.isRequired,
+				sex: PropTypes.string,
+				age: PropTypes.number,
+			}
+			// 对标签属性进行默认值设置
+			Person.defaultProps = {
+				sex: '男',
+				age: 18
+			}
+		ReactDOM.render(<Person name="jack" age={18} sex="男" />,document.getElementById('test'));
+	</script>
+</body>
+
+</html>
