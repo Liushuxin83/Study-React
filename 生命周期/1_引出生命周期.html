@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div id="test"></div>
+	<script src="../旧版本/react.development.js"></script>
+	<script src="../旧版本/react-dom.development.js"></script>
+	<script src="../旧版本/babel.min.js"></script>
+	<script type="text/babel">
+		class Life extends React.Component {
+			state = {
+				opacity: 1
+			}
+
+			dead = () => {
+				// 清除定时器  不清楚的话会报错
+				clearInterval(this.timer)
+				// 销毁组件
+				ReactDOM.unmountComponentAtNode(document.querySelector('#test'))
+			}
+			// 组件挂载完成声明周期   这个生命周期只调用一次（组件在页面挂载完毕）
+			componentDidMount() {
+				this.timer = setInterval(() => {
+					// 获取原状态
+					let { opacity } = this.state
+					// 减小0.1
+					opacity -= 0.1
+					if (opacity <= 0) { opacity = 1 }
+					// 设置新的透明度    只要改状态就会调用render函数  
+					this.setState({
+						opacity
+					})
+				}, 200)
+			}
+			// 组件将要卸载
+			componetWillUnmount() {
+				// 这里也可以清除定时器
+			}
+			// render调用时机  初始化渲染和状态更新之后
+			render() {
+				// 定时器放在这里不行
+				// setInterval(() => {
+				// 	// 获取原状态
+				// 	let { opacity } = this.state
+				// 	// 减小0.1
+				// 	opacity -= 0.1
+				// 	if (opacity <= 0) { opacity = 1 }
+				// 	// 设置新的透明度    只要改状态就会调用render函数  
+				// 	this.setState({
+				// 		opacity
+				// 	})
+				// }, 200)
+				// console.log('cpu升温');
+				console.log(111);
+				return (
+					<div>
+						<h2 style={{ opacity: this.state.opacity }}>React学不会怎么办？</h2>
+						<button onClick={this.dead}>不活了</button>
+					</div>
+				)
+			}
+		}
+		ReactDOM.render(<Life />, document.querySelector('#test'));
+	</script>
+</body>
+
+</html>

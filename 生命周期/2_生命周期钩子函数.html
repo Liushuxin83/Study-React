@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div id="test"></div>
+	<script src="../旧版本/react.development.js"></script>
+	<script src="../旧版本/react-dom.development.js"></script>
+	<script src="../旧版本/babel.min.js"></script>
+	<script type="text/babel">
+		class Count extends React.Component {
+			constructor(props) {
+				console.log('Count组件---constructor');
+				super(props)
+			}
+			state = {
+				count: 0
+			}
+			// 组件将要挂载到页面
+			componentWillMount() {
+				console.log('Count组件---componentWillMount');
+			}
+			componentDidMount() {
+				console.log('Count组件---componentDidMount');
+			}
+			// 此生命周期相当于一个阀门(控制组件更新)  若不写默认返回true  若自己手动返回false所有状态不会更新并且调用render函数
+			shouldComponentUpdate() {
+				console.log('Count组件---shouldComponentUpdate');
+				return true
+			}
+			// 组件将要更新
+			componentWillUpdate() {
+				console.log('Count组件---componentWillUpdate');
+			}
+			// 组件更新完毕
+			componentDidUpdate() {
+				console.log('Count组件---componentDidUpdate');
+			}
+			render() {
+				console.log('Count组件---render');
+				const { count } = this.state
+				return (
+					<div>
+						<h2>当前求和为{count}</h2>
+						<button onClick={this.add}>点我+1</button>
+					</div>
+				)
+			}
+			add = () => {
+				// 获取原来的状态
+				let { count } = this.state
+				// 设置状态
+				this.setState({
+					count: count + 1
+				})
+			}
+		}
+		class A extends React.Component {
+			state = {
+				carName: '奔驰'
+			}
+			changeCar = () => {
+				this.setState({
+					carName: '奥拓'
+				})
+			}
+			render() {
+				return (
+					<div>
+						<div>我是A组件</div>
+						<button onClick={this.changeCar}>换车</button>
+						<B carName={this.state.carName} />
+					</div>
+				)
+			}
+		}
+		class B extends React.Component {
+			// 这个周期函数 可以接收props参数
+			componentWillReceiveProps(props) {
+				console.log('B----componentWillReceiveProps', props);
+			}
+			render() {
+				// console.log(this);
+				return (
+					<div>我是B组件，接收到的车是：{this.props.carName}</div>
+				)
+			}
+		}
+		ReactDOM.render(<A />, document.querySelector('#test'));
+	</script>
+</body>
+
+</html>
