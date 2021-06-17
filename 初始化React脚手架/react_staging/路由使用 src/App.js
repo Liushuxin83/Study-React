@@ -9,7 +9,6 @@ export default class App extends Component {
 		return (
 			<div>
 				<Header />
-
 				{/* 路由链接    NavLink可以给链接加上高亮效果*/}
 				{/* <NavLink activeClassName="navlink-active" to="/home" style={{ display: 'block' }}>Home</NavLink>
 				<NavLink activeClassName="navlink-active" to="/about" style={{ display: 'block' }}>About</NavLink> */}
