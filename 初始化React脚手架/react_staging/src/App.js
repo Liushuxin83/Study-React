@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import Count from './container/Count'
-import Person from './container/Person'
+import Demo from './component/6_错误边界ErrorBoundary/Parent.jsx'
 export default class App extends Component {
 	render() {
 		return (
 			<div>
-				{/* 渲染容器组件 */}
-				<Count />
-				<hr />
-				<Person />
+				<Demo />
 			</div>
 		)
 	}
