@@ -8,7 +8,6 @@ import store from './redux/store'
 import { Provider } from 'react-redux'
 // 渲染App组件到页面
 ReactDOM.render(
-	// 此处需要provider包裹App组件，目的是让App所有的容器组件都能接收到store
 	<Provider store={store}>
 		<App />
 	</Provider>

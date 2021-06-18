@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import Count from './container/Count'
-import Person from './container/Person'
+import Count from './component/Count'
 export default class App extends Component {
 	render() {
 		return (
 			<div>
-				{/* 渲染容器组件 */}
 				<Count />
-				<hr />
-				<Person />
 			</div>
 		)
 	}
